@@ -7,7 +7,7 @@ const users={};
 //io.on is actually socket.io.on that is, it is a socket.io instance of http. It listens to multiple socket connections
 //socket.on works on a particular connection
 io.on('connection', socket=>{
-  
+  //If any new user joins, let other users connected to the server know it.
     socket.on('new-user-joined', name=>{
         console.log(name);
      users[socket.id]=name;
