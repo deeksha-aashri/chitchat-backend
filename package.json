@@ -9,6 +9,7 @@
   "author": "Deeksha Aashri",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "nodemon": "^2.0.20",
     "socket.io": "^4.5.4",
     "socketio": "^1.0.0"

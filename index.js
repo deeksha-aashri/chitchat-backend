@@ -1,4 +1,4 @@
-const io=require('socket.io')(3000);//any port can be taken. Socket.io server is attached to an instance of http. It listens to incoming events.
+const io=require('socket.io')(8000, {cors: {origin: "*"}} );//any port can be taken. Socket.io server is attached to an instance of http. It listens to incoming events.
 //socket is a particular connection
 
 const users={};
@@ -9,6 +9,7 @@ const users={};
 io.on('connection', socket=>{
   
     socket.on('new-user-joined', name=>{
+        console.log(name);
      users[socket.id]=name;
      socket.broadcast.emit('user-joined', name)//socket.broadcast.emit emits a msg to all except the socket connection which has joined 
   });
@@ -17,6 +18,11 @@ socket.on('send', message=>{
     socket.broadcast.emit('receive', {message:message, name:users[socket.id]})
 });
 
+
+socket.on('disconnect', message=>{
+    socket.broadcast.emit('user-left', users[socket.id]);
+    delete users[socket.id]
+} )
 
 
 })
